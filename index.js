@@ -1,11 +1,18 @@
 const jsonServer = require("json-server");
-const cors = require("cors"); // Import cors middleware
+const cors = require("cors");
 const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 8080;
 
-server.use(cors()); // Enable CORS
+// Enable CORS with explicit headers
+const corsOptions = {
+  origin: "*", // Allow all origins
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+};
+
+server.use(cors(corsOptions)); // Apply CORS middleware
 server.use(middlewares);
 server.use(router);
 
