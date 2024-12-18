@@ -1,21 +1,10 @@
-const jsonServer = require("json-server");
-const cors = require("cors");
+const jsonServer = require("json-server"); // importing json-server library
 const server = jsonServer.create();
 const router = jsonServer.router("jobs.json");
 const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080; //  chose port from here like 8080, 3001
 
-// Enable CORS with explicit headers
-const corsOptions = {
-  origin: "*", // Allow all origins
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
-};
-
-server.use(cors(corsOptions)); // Apply CORS middleware
 server.use(middlewares);
 server.use(router);
 
-server.listen(port, () => {
-  console.log(`JSON Server is running on port ${port}`);
-});
+server.listen(port);
